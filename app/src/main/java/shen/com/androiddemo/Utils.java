@@ -28,6 +28,6 @@ public class Utils {
 	}
 
 	public static float getWindowHeight(Context context) {
-		return getWindowWidth(context) * 1.5f;
+		return getWindowWidth(context) * 1.7f;
 	}
 }
