@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.MenuItem;
 import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,11 +31,9 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 		listView.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false));
 		adapter = new MovieListAdapter(this);
 		adapter.setOnItemClickListener(this);
+		listView.addItemDecoration(
+				new GridSpacingDecoration(getResources().getDimensionPixelOffset(R.dimen.movie_grid_view_margin)));
 		listView.setAdapter(adapter);
-	}
-
-	@Override protected void onResume() {
-		super.onResume();
 		query();
 	}
 
@@ -69,5 +66,4 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 						.putExtra(MovieDetailActivity.INTENT_EXTRA_MOVIE_TITLE, title);
 		startActivity(intent);
 	}
-
 }

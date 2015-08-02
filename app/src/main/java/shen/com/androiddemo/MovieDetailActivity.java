@@ -72,15 +72,15 @@ public class MovieDetailActivity extends AppCompatActivity {
 	}
 
 	private void setData(BasicMovieInfo info) {
-		overview.setText(info.overview);
-		releaseDate.setText(getString(R.string.released) + " " + info.releaseDate);
+		Uri uri = Uri.parse(Utils.fullPosterUrl(info.posterPath));
 		poster.setLayoutParams(
 				new RelativeLayout.LayoutParams((int) Utils.getWindowWidth(this) / 2, (int) Utils.getWindowHeight(this) / 2));
-		Uri uri = Uri.parse(Utils.fullPosterUrl(info.posterPath));
 		Picasso.with(this).load(uri).fit().centerCrop().into(poster);
-		runTime.setText(info.runtime + " " + getString(R.string.minutes));
+		releaseDate.setText(String.format(getString(R.string.released), info.releaseDate));
+		runTime.setText(String.format(getString(R.string.minutes), info.runtime));
 		score.setText(String.format(getString(R.string.avg_rating), info.voteAverage));
 		userRatings.setText(String.format(getString(R.string.user_ratings), info.voteCount));
+		overview.setText(info.overview);
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {

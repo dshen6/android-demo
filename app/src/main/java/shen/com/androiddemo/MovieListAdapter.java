@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import com.squareup.picasso.Picasso;
@@ -52,7 +51,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
 		MovieInfo movie = movies.get(position);
 		Uri uri = Uri.parse(Utils.fullPosterUrl(movie.posterPath));
 		Picasso.with(context).load(uri).fit().centerCrop().into(holder.poster);
-		holder.title.setText(movie.title);
 	}
 
 	@Override public int getItemCount() {
@@ -66,7 +64,6 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
 
 	public class ViewHolder extends RecyclerView.ViewHolder {
 
-		@Bind(R.id.title) TextView title;
 		@Bind(R.id.poster) ImageView poster;
 
 		public ViewHolder(View itemView) {
