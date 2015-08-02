@@ -29,6 +29,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 	private static final String TAG = MovieDetailActivity.class.getSimpleName();
 
 	@Bind(R.id.poster) ImageView poster;
+	@Bind(R.id.title) TextView title;
 	@Bind(R.id.runTime) TextView runTime;
 	@Bind(R.id.releaseDate) TextView releaseDate;
 	@Bind(R.id.score) TextView score;
@@ -74,8 +75,9 @@ public class MovieDetailActivity extends AppCompatActivity {
 	private void setData(BasicMovieInfo info) {
 		Uri uri = Uri.parse(Utils.fullPosterUrl(info.posterPath));
 		poster.setLayoutParams(
-				new RelativeLayout.LayoutParams((int) Utils.getWindowWidth(this) / 2, (int) Utils.getWindowHeight(this) / 2));
+				new RelativeLayout.LayoutParams((int) Utils.getWindowWidth(this) / 3, (int) Utils.getWindowHeight(this) / 3));
 		Picasso.with(this).load(uri).fit().centerCrop().into(poster);
+		title.setText(info.title);
 		releaseDate.setText(String.format(getString(R.string.released), info.releaseDate));
 		runTime.setText(String.format(getString(R.string.minutes), info.runtime));
 		score.setText(String.format(getString(R.string.avg_rating), info.voteAverage));

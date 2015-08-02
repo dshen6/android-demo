@@ -1,9 +1,9 @@
 <resources>
 	<string name="app_name">AndroidDemo</string>
 	<string name="now_playing">Now Playing</string>
-	<string name="minutes" formatted = "false">"Runtime : %s min"</string>
-	<string name="released" formatted = "false">"Release Date: %s"</string>
-	<string name="avg_rating" formatted = "false">"Average Rating: %s"</string>
+	<string name="minutes" formatted = "false">"Runtime: %s min"</string>
+	<string name="released" formatted = "false">"Released: %s"</string>
+	<string name="avg_rating" formatted = "false">"Avg Rating: %s/10"</string>
 	<string name="user_ratings" formatted = "false">"User Ratings: %s"</string>
 	<string name="view_trailer">View Trailer</string>
 
