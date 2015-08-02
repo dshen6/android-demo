@@ -1,12 +1,13 @@
 package shen.com.androiddemo;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -62,7 +63,11 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 		}.execute();
 	}
 
-	@Override public void movieSelected(String movieId) {
-		Log.d(TAG, "id is " + movieId);
+	@Override public void movieSelected(String movieId, String title) {
+		Intent intent =
+				new Intent(this, MovieDetailActivity.class).putExtra(MovieDetailActivity.INTENT_EXTRA_MOVIE_ID, movieId)
+						.putExtra(MovieDetailActivity.INTENT_EXTRA_MOVIE_TITLE, title);
+		startActivity(intent);
 	}
+
 }

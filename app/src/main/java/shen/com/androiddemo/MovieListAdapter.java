@@ -35,7 +35,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
 	}
 
 	public interface OnItemClickDelegate {
-		void movieSelected(String movieId);
+		void movieSelected(String movieId, String title);
 	}
 
 	public void setOnItemClickListener(OnItemClickDelegate delegate) {
@@ -75,7 +75,8 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override public void onClick(View v) {
 					if (delegate != null) {
-						delegate.movieSelected(movies.get(ViewHolder.this.getAdapterPosition()).id);
+						MovieInfo info = movies.get(ViewHolder.this.getAdapterPosition());
+						delegate.movieSelected(info.id, info.title);
 					}
 				}
 			});

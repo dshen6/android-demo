@@ -1,6 +1,11 @@
 <resources>
 	<string name="app_name">AndroidDemo</string>
 	<string name="now_playing">Now Playing</string>
+	<string name="minutes">min</string>
+	<string name="released">Released</string>
+	<string name="avg_rating" formatted= "false">"Average Rating: %s"</string>
+	<string name="user_ratings" formatted= "false">"User Ratings: %s"</string>
+	<string name="view_trailer">View Trailer</string>
 
 	<string name="offline_error">"Error querying - please check your connection"</string>
 </resources>
