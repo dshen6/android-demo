@@ -18,6 +18,4 @@ public interface MovieService {
 	@GET("/movie/{id}")
 	void getBasicMovieInfo(@Path("id") String movieId, Callback<BasicMovieInfo> callback);
 
-	//@GET("/movie/{id}/videos")
-	//void getVideosForMovie(@Path("id") int movieId, Callback<NowPlayingResponse> callback);
 }

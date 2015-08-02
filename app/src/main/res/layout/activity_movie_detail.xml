@@ -69,12 +69,6 @@
 				android:layout_marginTop="@dimen/padding_large"
 				/>
 
-		<Button android:layout_width="120dp" android:layout_height="50dp"
-				android:layout_below="@id/poster"
-				android:visibility="gone"
-				android:id="@+id/viewTrailer"
-				android:text="@string/view_trailer"/>
-
 	</RelativeLayout>
 
 </ScrollView>

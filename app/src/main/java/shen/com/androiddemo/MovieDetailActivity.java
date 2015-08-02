@@ -35,7 +35,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 	@Bind(R.id.score) TextView score;
 	@Bind(R.id.userRatings) TextView userRatings;
 	@Bind(R.id.overview) TextView overview;
-	@Bind(R.id.viewTrailer) Button viewTrailer;
 
 	@Override protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,36 +46,30 @@ public class MovieDetailActivity extends AppCompatActivity {
 	}
 
 	public void query() {
-		new AsyncTask<Void, Void, Void>() {
+		String movieId = getIntent().getStringExtra(INTENT_EXTRA_MOVIE_ID);
 
-			@Override protected Void doInBackground(Void... params) {
-				final String movieId = getIntent().getStringExtra(INTENT_EXTRA_MOVIE_ID);
-				if (movieId == null) {
-					return null;
-				}
-				ApiManager.getMovieService().getBasicMovieInfo(movieId, new Callback<BasicMovieInfo>() {
-					@Override public void success(final BasicMovieInfo basicMovieInfo, Response response) {
-						runOnUiThread(new Runnable() {
-							@Override public void run() {
-								setData(basicMovieInfo);
-							}
-						});
-					}
-
-					@Override public void failure(RetrofitError error) {
-						Toast.makeText(MovieDetailActivity.this, R.string.offline_error, Toast.LENGTH_SHORT).show();
+		Callback<BasicMovieInfo> callback = new Callback<BasicMovieInfo>() {
+			@Override public void success(final BasicMovieInfo basicMovieInfo, Response response) {
+				runOnUiThread(new Runnable() {
+					@Override public void run() {
+						setData(basicMovieInfo);
 					}
 				});
-				return null;
 			}
-		}.execute();
+
+			@Override public void failure(RetrofitError error) {
+				Toast.makeText(MovieDetailActivity.this, R.string.offline_error, Toast.LENGTH_SHORT).show();
+			}
+		};
+
+		ApiManager.queryForBasicMovieInfoWithCallback(movieId, callback);
 	}
 
 	private void setData(BasicMovieInfo info) {
 		Uri uri = Uri.parse(Utils.fullPosterUrl(info.posterPath));
 		poster.setLayoutParams(
 				new RelativeLayout.LayoutParams((int) Utils.getWindowWidth(this) / 3, (int) Utils.getWindowHeight(this) / 3));
-		Picasso.with(this).load(uri).fit().centerCrop().into(poster);
+		Picasso.with(this).load(uri).into(poster);
 		title.setText(info.title);
 		releaseDate.setText(String.format(getString(R.string.released), info.releaseDate));
 		runTime.setText(String.format(getString(R.string.minutes), info.runtime));

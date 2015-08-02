@@ -28,9 +28,9 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 		setContentView(R.layout.activity_main);
 		ButterKnife.bind(this);
 
-		listView.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false));
 		adapter = new MovieListAdapter(this);
 		adapter.setOnItemClickListener(this);
+		listView.setLayoutManager(new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false));
 		listView.addItemDecoration(
 				new GridSpacingDecoration(getResources().getDimensionPixelOffset(R.dimen.movie_grid_view_margin)));
 		listView.setAdapter(adapter);
@@ -38,26 +38,21 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 	}
 
 	public void query() {
-
-		new AsyncTask<Void, Void, Void>() {
-
-			@Override protected Void doInBackground(Void... params) {
-				ApiManager.getMovieService().getNowPlaying(1, new Callback<NowPlayingResponse>() {
-					@Override public void success(final NowPlayingResponse nowPlayingResponse, Response response) {
-						runOnUiThread(new Runnable() {
-							@Override public void run() {
-								adapter.setData(nowPlayingResponse.movies);
-							}
-						});
-					}
-
-					@Override public void failure(RetrofitError error) {
-						Toast.makeText(MainActivity.this, R.string.offline_error, Toast.LENGTH_SHORT).show();
+		Callback<NowPlayingResponse> callback = new Callback<NowPlayingResponse>() {
+			@Override public void success(final NowPlayingResponse nowPlayingResponse, Response response) {
+				runOnUiThread(new Runnable() {
+					@Override public void run() {
+						adapter.setData(nowPlayingResponse.movies);
 					}
 				});
-				return null;
 			}
-		}.execute();
+
+			@Override public void failure(RetrofitError error) {
+				Toast.makeText(MainActivity.this, R.string.offline_error, Toast.LENGTH_SHORT).show();
+			}
+		};
+
+		ApiManager.queryForNowPlayingWithCallback(callback);
 	}
 
 	@Override public void movieSelected(String movieId, String title) {
