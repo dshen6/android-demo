@@ -50,7 +50,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.View
 	@Override public void onBindViewHolder(ViewHolder holder, int position) {
 		MovieInfo movie = movies.get(position);
 		Uri uri = Uri.parse(Utils.fullPosterUrl(movie.posterPath));
-		Picasso.with(context).load(uri).into(holder.poster);
+		Picasso.with(context).load(uri).fit().centerCrop().into(holder.poster);
 	}
 
 	@Override public int getItemCount() {

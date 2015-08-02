@@ -69,7 +69,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 		Uri uri = Uri.parse(Utils.fullPosterUrl(info.posterPath));
 		poster.setLayoutParams(
 				new RelativeLayout.LayoutParams((int) Utils.getWindowWidth(this) / 3, (int) Utils.getWindowHeight(this) / 3));
-		Picasso.with(this).load(uri).into(poster);
+		Picasso.with(this).load(uri).fit().centerCrop().into(poster);
 		title.setText(info.title);
 		releaseDate.setText(String.format(getString(R.string.released), info.releaseDate));
 		runTime.setText(String.format(getString(R.string.minutes), info.runtime));
