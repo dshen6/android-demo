@@ -1,7 +1,6 @@
 package shen.com.androiddemo;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -56,9 +55,7 @@ public class MainActivity extends AppCompatActivity implements MovieListAdapter.
 	}
 
 	@Override public void movieSelected(String movieId, String title) {
-		Intent intent =
-				new Intent(this, MovieDetailActivity.class).putExtra(MovieDetailActivity.INTENT_EXTRA_MOVIE_ID, movieId)
-						.putExtra(MovieDetailActivity.INTENT_EXTRA_MOVIE_TITLE, title);
+		Intent intent = MovieDetailActivity.MovieDetailIntentWithIdAndTitle(this, movieId, title);
 		startActivity(intent);
 	}
 }

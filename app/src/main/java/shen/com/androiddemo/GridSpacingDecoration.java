@@ -29,7 +29,6 @@ public class GridSpacingDecoration extends RecyclerView.ItemDecoration {
 		int spanCount = getTotalSpan(parent);
 		int spanIndex = childIndex % spanCount;
 
-        /* INVALID SPAN */
 		if (spanCount < 1) return;
 
 		outRect.top = halfSpacing;
